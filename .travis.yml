@@ -1,0 +1,22 @@
+language: minimal
+os: linux
+dist: xenial
+before_install:
+- sudo apt update
+- sudo apt install desktop-file-utils
+- wget https://raw.githubusercontent.com/probonopd/AppImages/master/pkg2appimage
+- sudo install -D -m755 pkg2appimage /usr/bin/pkg2appimage
+- wget https://github.com/AppImage/AppImageKit/releases/download/11/appimagetool-x86_64.AppImage
+- sudo install -D -m755 appimagetool-x86_64.AppImage /usr/bin/appimagetool
+script:
+- make
+deploy:
+  provider: releases
+  api-key:
+    secure: Owvksk7JWnnPQXSMBo0kKxsRDGgBsGKu1JG0pRWQCVOspFPRPUCsoB2FVoBxgbWNF5AMkJSDtPP3iH8ueqgVB/QYtw3n/Ng9sswTIjANtB9QCHX3GI3Cq/6S6UFQW/tPpSlWTWoMBMqQVEwAFvxypdWbK8PyyRSlSGGlhAt6KC6Xxft/oyH+9a8TihWtA5AgL7hIX09yNy7MUFZzzDuuBUkJkcEFPgp/kt0eLpQFvVkYCDbMEQQNBsyFv919I5cDdF19f2xRlWSKlaprCJfPIcD37lPJp9ZAC+Or9vQ+cDeCt6sOIuh6xt/CnX4MRqiJNtWaGsGKGJy04r++HEcVk700F0Yhba1ogHv6uNij4jSN/XWhq9BGCnyQmf5EHFyivk72Ua0KvPj0sXrm9P2EkKLWSxHP2TTzFFDf+mBWSJ94jLThbury/Al8qBLCLeVHhUvame/KP3RaU5ht9xRGjjaeNDGzRsdfkIA4ebZKNnKrWbR3l9aiqY7gld1J3rfgVgf8yYhAAJkb5FVjtj9LVKEzCpWkbLRMC2mBjhnD+b88lsiv6+Ol/7s/M2xhambYc1sbhWCLIfJm7NqeDF/uObDV/GZ+mpZk0aT2SxKNy7Y5sZZiM4qNLtUQC12w1DLMjyb+UYGzXcJmp/6ZQ1mVXuyFsdfnrzF/mqIQzGrKYhs=
+  file: out/*.AppImage
+  file_glob: true
+  skip_cleanup: true
+  on:
+    repo: jpcima/AppImage-OpenMPT
+    tags: true

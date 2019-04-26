@@ -1,0 +1,25 @@
+app: OpenMPT
+
+ingredients:
+  dist: xenial
+  script:
+    - echo "@VERSION@" > VERSION
+    - wget -c -O OpenMPT-x64.zip "https://openmpt.org/download_file.php?file=OpenMPT-@VERSION@-x64.zip"
+    - wget -c -O PlayOnLinux-wine-linux-amd64.tar.gz https://www.playonlinux.com/wine/binaries/phoenicis/staging-linux-amd64/PlayOnLinux-wine-4.6-staging-linux-amd64.tar.gz
+  packages:
+    - libfreetype6
+    - libxext6
+    - libudev1
+    - libncurses5
+    - libpng16-16
+    - libgnutls30
+  sources:
+    - deb http://archive.ubuntu.com/ubuntu/ xenial main universe
+
+script:
+  - cp -f ../../openmpt.desktop .
+  - cp -f ../../openmpt_256x256.png openmpt.png
+  - install -m755 ../../openmpt.sh usr/bin/openmpt
+  - unzip -q -d usr/share ../OpenMPT-x64.zip
+  - tar -C usr -x -z -f ../PlayOnLinux-wine-linux-amd64.tar.gz --exclude='./lib/*' --exclude='./bin/wine' --exclude='./bin/wine-preloader'
+  - mv usr/share/OpenMPT-"@VERSION@" usr/share/OpenMPT

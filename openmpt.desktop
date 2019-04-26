@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenMPT
+Comment=Audio module tracker
+Exec=openmpt
+Icon=openmpt
+Terminal=false
+StartupNotify=false
+Categories=Audio;Sequencer;Midi;AudioVideoEditing;Music;AudioVideo;
+MimeType=audio/x-mod;audio/x-s3m;audio/x-xm;audio/x-it;audio/x-mptm;
